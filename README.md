@@ -2,7 +2,7 @@
 
 ## What is this?
 
-This is a basic app with five security flaws intentionally left in the source code. This repository is my submissions in the University of Helsinki course Cyber Security Base 2023 Project I. You can find the course materials [here](https://cybersecuritybase.mooc.fi/module-3.1).
+This is a basic app with five security flaws intentionally left in the source code. This repository is my submissions in the University of Helsinki course Cyber Security Base 2023 Project I. You can find the course materials [here](https://cybersecuritybase.mooc.fi/module-3.1). The file [EssayCyberSecurityMooc.txt](https://github.com/sippohippo/cybersecuritybase-project1/blob/main/EssayCyberSecurityMooc.txt) contains the descriptions of the flaws.
 
 
 ## Short description of the app
