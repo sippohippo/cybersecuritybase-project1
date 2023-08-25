@@ -10,7 +10,7 @@ This is a basic app with five security flaws intentionally left in the source co
 This flask app is a small browser experiment / game where participants are shown a simulated social media feed and asked to label the profiles they see as humans or bots. This is used to demonstrate how distinguishing profile pictures and posts generated with deep learning from genuine posts and pictures is very difficult. A full description of the project is given in the bottom of the page.
 
 
-## Installation, setup and testing
+## Installation, setup and running the app
 
 This app and guide assumes you have access to a terminal/console which has bash. 
 
@@ -54,6 +54,8 @@ psql < data.sql
 ```bash
 flask run
 ```
+
+7. Open the app by going to http://127.0.0.1:5000 in your browser
 
 
 ## User guide
