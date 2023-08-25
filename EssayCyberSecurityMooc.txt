@@ -55,7 +55,12 @@ Link: https://github.com/sippohippo/cybersecuritybase-project1/blob/main/usertoo
 
 Description: The newuser() function in usertools.py has been written so that there is no sanitizing or parameterization of the user's input. This means that this form is vulnerable to SQL injections. This can be tested by running the app and selecting Log in and testing the following injection in place of the username the following injection:
 test'); DROP TABLE users CASCADE; --'
-This injection would drop the entire table. 
+This injection would drop the entire table. Note, if you decide to test the injection and drop the table, you will need to inside postgreSQL reinsert the table and rows. This is easiest done by within the postgreSQL by using:
+	drop schema public cascade; 
+	create schema public;
+and then runnig again in the console the following:
+	psql < schema.sql
+	psql < data.sql
 
 How to fix: This can be fixed by the commented out code below the existing function newuser() in usertools, where the input (email) is safely entered as a parameter into the query, resulting in it being a string and not interpreting the additional command. Now the injection will not work. More information about parameterization can be found here: https://cheatsheetseries.owasp.org/cheatsheets/Query_Parameterization_Cheat_Sheet.html. 
 
