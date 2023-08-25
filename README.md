@@ -40,7 +40,7 @@ source venv/bin/activate
 pip install -r ./requirements.txt
 ```
 
-5. Setup the database and populate it with the data. Note, you need to change the image file addresses to your local ones in lines 5-10 in the test data! 
+5. Setup the database and populate it with the data. Note, you need to change the image file addresses to your local ones in lines 5-10 in the test data! More specifically, go to the test_images folder, see what your address to each file is and change the respective address in the data.sql file. This would be done by replacing this /Users/sippo/ part of the address with your own address where you cloned the repository.
 
 ```bash
 psql < schema.sql
