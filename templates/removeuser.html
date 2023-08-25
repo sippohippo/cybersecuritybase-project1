@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Admin view</h2>
+
+<h3>Emails of participants</h3>
+
+{% for i in participants %}
+{{ i.email }}
+<br>
+{% endfor %}
+<hr>
+<h3>Removing participants</h3>
+
+<form action="/remove" method="POST">
+Email:
+<input type="text" name="email">
+<br>
+<p>Note! Removing a participant removes their votes and profile and results in a recalculation of the results.</p>
+
+<button type="submit" value="Remove">Remove participant</button>
+</form>
+<!-- <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}"> -->
+<a href="/admin">Return</a>
+
+{% endblock %}

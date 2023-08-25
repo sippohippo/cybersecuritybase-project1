@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Main menu</h2>
+
+{% if session.email %}
+<p>Logged in with email {{ session.email }}</p>
+<a href="/experiment">Start the experiment</a>
+<br>
+<a href="/logout">Log out</a>
+{% else %}
+<a href="/login">Log in</a>
+<br>
+<a href="/newuser">New user</a>
+{% endif %}
+
+{% endblock %}

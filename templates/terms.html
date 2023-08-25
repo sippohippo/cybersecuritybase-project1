@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Disclaimer</h2>
+
+<p>We believe there might be discomforts to you in this research study.</p>
+
+<p>The experiment contains real posts from Twitter with varying topics. The topics are neutral and benign and none of the tweets contain graphic or otherwise disturbing content. Some tweets can contain mild name-calling or otherwise rude behavior.</p>
+
+<p>All data collected during this study will be stored securely and all published results will be anonymized and untradeable to an individual participant. By accepting these terms you agree to the storage of your data. The email address will be used only for contacting winners when raffling prizes to participants of the study</p>
+
+<p>You can exit the study at any point and cancel your participation. Please click accept below to confirm you have read the disclaimer and accept that your answers to this study will be collected and used for research purposes anonymously.</p>
+
+<form action="/terms" method="POST">
+<input type="radio" name="response" value=1> Accept and start the experiment
+<br>
+<input type="radio" name="response" value=0> Decline and go back to main menu
+<br>
+<button type="submit" value="Submit">Submit</button>
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+LINK: 
+
+This submission uses the OWASP 2021 list.
+
+
+FLAW 1: A01:2021 – Broken Access Control
+Link: 
+
+The admin page and remove users page should be accessible only by admins. The pages are created by the admin() and remove() functions in routes.py. However, now with force browsing and guessing an easily guessable url adding only to the end /admin the user can access the admin panel and see information that they should not see and even remove users by guessing /remove.
+
+This can be fixed by making all the contents of the admin pages being calculated and rendered only if the logged in session is with an admin account and otherwise the user is sent to an error page. The code that fixes this is commented out and directly below the admin() and remove() functions in routes.py.
+
+
+FLAW 2: A02:2021 – Cryptographic Failures 
+Link: 
+
+Passwords are stored as plaintext in the database.
+
+This is fixed by adding hashing to the newuser function with a high quality library that will also salt the passwords. First we import a library which is commented out in the top of the usertools.py file:
+from werkzeug.security import check_password_hash, generate_password_hash
+Then we add password = generate_password_hash(password) and now all password that are stored in the database are hashed and no longer plaintext. Next we modify the login function to also have the hashed password check. Modifications commented out on lines 17 and 31 of usertools.py. 
+
+
+FLAW 3: A03:2021 – Injection
+Link:
+
+The newuser() function in usertools.py has been written so that there is no sanitizing or parameterization of the user's input. This means that this form is vulnerable to SQL injections. This can be tested by running the app and selecting Log in and testing the following injection in place of the username the following injection:
+test'); DROP TABLE users CASCADE; --'
+
+This can be fixed by the commented out code below the existing function newuser() in usertools, where the input (email) is safely entered as a parameter into the query, resulting in it being a string and not interpreting the additional command. Now the injection will not work. 
+
+
+FLAW 4: A05:2021 – Security Misconfiguration
+Link: 
+
+The default admin user credentials are username: admin and password: admin. These are inseted into the app as the data needed in other parts are populated. This could be used for testing purposes, but should never make it to a production app.
+
+This can be fixed by removing the last line (22) from the data.sql file, and instead after creating a new account with a better name and password, entering the accounts name into the file makeaccountadmin.sql using the script to convert it. Then in the command line use psql < makeaccountadmin.sql to convert an account to an admin account.
+
+
+FLAW 5: CSRF - Outside of OWASP list as permitted by the assignment
+Link: 
+
+There is a CSRF vulnerability which is particularly nasty with the /remove page and thus removeuser.html file. There is a form with no CSRF token check.
+
+This is fixed by adding a hidden input to the form that checks the session.csrf_token, which is commented in line 23 of removeuser.html. The csrf_token is generated every time a user logs in by the login function in usertools.py
+
+
+
+
+
