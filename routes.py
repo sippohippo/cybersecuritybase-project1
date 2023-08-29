@@ -65,6 +65,8 @@ def experiment():
         return render_template("experiment.html", profiles=profiles)
 
     if request.method == "POST":
+        # if session["csrf_token"] != request.form["csrf_token"]:
+        #     abort(403)
         for i in range(1, len(profiles) + 1):
             vote = request.form[str(i)]
             votes.append(vote)
@@ -107,6 +109,8 @@ def remove():
         return render_template("removeuser.html", participants=participants)
 
     if request.method == "POST":
+        # if session["csrf_token"] != request.form["csrf_token"]:
+        #     abort(403)
         user = request.form["email"]
         user_id = admintools.get_id(user)
         if user_id is None:
@@ -123,6 +127,8 @@ def remove():
     #         return render_template("removeuser.html", participants=participants)
 
     #     if request.method == "POST":
+    #         if session["csrf_token"] != request.form["csrf_token"]:
+    #             abort(403)
     #         user = request.form["email"]
     #         user_id = admintools.get_id(user)
     #         if user_id is None:
