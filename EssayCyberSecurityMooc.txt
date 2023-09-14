@@ -73,14 +73,11 @@ Description: The default admin user credentials are username: admin and password
 How to fix: This can be fixed by removing the last line (22) from the data.sql file, and instead after creating a new account with a better name and password, entering the accounts name into the file makeaccountadmin.sql using the script to convert it. Then in the command line use psql < makeaccountadmin.sql to convert an account to an admin account.
 
 
-FLAW 5: CSRF - Outside of OWASP list as permitted by the assignment
-Link: https://github.com/sippohippo/cybersecuritybase-project1/blob/main/templates/removeuser.html and 
-https://github.com/sippohippo/cybersecuritybase-project1/blob/main/templates/removeuser.html#L23
+FLAW 5: CSRF - Outside of OWASP list as permitted by the assignment Link: https://github.com/sippohippo/cybersecuritybase-project1/blob/main/templates/removeuser.html and  https://github.com/sippohippo/cybersecuritybase-project1/blob/main/templates/removeuser.html#L23 and https://github.com/sippohippo/cybersecuritybase-project1/blob/main/routes.py#L112  
 
-Description: There is a CSRF vulnerability which is particularly nasty with the /remove page and thus templates/removeuser.html file, as through this an attacker could control the delete users form. There is a form with no CSRF token check.
+Description: There is a CSRF vulnerability which is particularly nasty with the /remove page and thus templates/removeuser.html file, as through this an attacker could control the delete users form. There is a form with no CSRF token check in the html page and in the backend (routes.py).  
 
-How to fix: This is fixed by adding a hidden input to the form that checks the session.csrf_token, which is commented in line 23 of removeuser.html. The csrf_token is generated every time a user logs in by the login function in usertools.py
-
+How to fix: This is fixed by adding a hidden input to the form that checks the session.csrf_token, which is commented in line 23 of removeuser.html, and to the backend (routes.py) by adding there the CSRF check under POST, which is done in lines 112-113. The csrf_token itself is generated every time a user logs in by the login function in usertools.py.   
 
 
 
